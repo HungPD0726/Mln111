@@ -5,7 +5,7 @@ import ZodiacSection from '../components/ZodiacSection';
 import { IoSparkles, IoRefresh } from 'react-icons/io5';
 import './TarotPage.css';
 
-const TarotPage = () => {
+const TarotPage = ({ onCardSelect }) => {
   const [activeTab, setActiveTab] = useState('tarot'); // 'tarot' or 'zodiac'
   const [selectedCards, setSelectedCards] = useState([null, null, null]);
   const [revealedCards, setRevealedCards] = useState([false, false, false]);
@@ -155,9 +155,9 @@ const TarotPage = () => {
                 <h3>Cách Rút Bài</h3>
                 <p>Bạn sẽ rút 3 lá bài để xem vận may trong:</p>
                 <ul>
-                  <li>🍀 <strong>May Mắn</strong> - Vận may chung trong cuộc sống</li>
-                  <li>💖 <strong>Tình Yêu</strong> - Tình cảm và các mối quan hệ</li>
-                  <li>💼 <strong>Sự Nghiệp</strong> - Công việc và học tập</li>
+                  <li><strong>May Mắn</strong> - Vận may chung trong cuộc sống</li>
+                  <li><strong>Tình Yêu</strong> - Tình cảm và các mối quan hệ</li>
+                  <li><strong>Sự Nghiệp</strong> - Công việc và học tập</li>
                 </ul>
                 <p className="note">✨ Hãy tập trung suy nghĩ về câu hỏi của bạn trước khi rút bài</p>
               </div>
@@ -198,6 +198,7 @@ const TarotPage = () => {
                       onReveal={() => handleRevealCard(index)}
                       isReversed={card.isReversed}
                       category={card.category}
+                      onCardSelect={onCardSelect}
                     />
                   ))}
                 </div>

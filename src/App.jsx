@@ -9,6 +9,7 @@ import CollapsibleMenu from "./components/CollapsibleMenu";
 const LearningPage = lazy(() => import("./pages/LearningPage"));
 const MillionaireGame = lazy(() => import("./pages/MillionaireGame"));
 const TarotPage = lazy(() => import("./pages/TarotPage"));
+const TarotDetailPage = lazy(() => import("./pages/TarotDetailPage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const KarlMarxPage = lazy(() => import("./pages/KarlMarxPage"));
 const EngelsPage = lazy(() => import("./pages/EngelsPage"));
@@ -17,6 +18,7 @@ const LeninPage = lazy(() => import("./pages/LeninPage"));
 function App() {
   const [currentView, setCurrentView] = useState("learning"); // 'learning' or 'game'
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
+  const [selectedTarotCard, setSelectedTarotCard] = useState(null); // For tarot detail view
 
   // Initialize AOS
   useEffect(() => {
@@ -89,7 +91,15 @@ function App() {
       >
         {currentView === "learning" && <LearningPage />}
         {currentView === "game" && <MillionaireGame />}
-        {currentView === "tarot" && <TarotPage />}
+        {currentView === "tarot" && !selectedTarotCard && (
+          <TarotPage onCardSelect={setSelectedTarotCard} />
+        )}
+        {currentView === "tarot" && selectedTarotCard && (
+          <TarotDetailPage 
+            card={selectedTarotCard} 
+            onBack={() => setSelectedTarotCard(null)} 
+          />
+        )}
         {currentView === "marx" && <KarlMarxPage />}
         {currentView === "engels" && <EngelsPage />}
         {currentView === "lenin" && <LeninPage />}

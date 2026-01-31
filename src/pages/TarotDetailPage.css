@@ -1,0 +1,366 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap');
+
+.tarot-detail-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a0b2e 0%, #16213e 50%, #0f3460 100%);
+  padding: 2rem;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Background Effects */
+.detail-bg-effects {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.3;
+  animation: float 10s ease-in-out infinite;
+}
+
+.bg-circle-1 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent);
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.bg-circle-2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.3), transparent);
+  bottom: 10%;
+  right: 10%;
+  animation-delay: 2s;
+}
+
+.bg-circle-3 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.3), transparent);
+  top: 50%;
+  left: 50%;
+  animation-delay: 4s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(30px, -30px);
+  }
+}
+
+/* Container */
+.detail-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Back Button */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  color: white;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 2rem;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(139, 92, 246, 0.5);
+  transform: translateX(-5px);
+}
+
+/* Content Layout */
+.detail-content {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+/* Card Section */
+.detail-card-section {
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+}
+
+.detail-card-wrapper {
+  position: relative;
+}
+
+.detail-card-image {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(139, 92, 246, 0.3);
+  border: 3px solid rgba(139, 92, 246, 0.5);
+}
+
+.detail-card-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.detail-card-image:hover img {
+  transform: scale(1.05);
+}
+
+.card-shine {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 70%
+  );
+  transform: rotate(45deg);
+  animation: shine 3s ease-in-out infinite;
+}
+
+@keyframes shine {
+  0%, 100% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  50% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+.card-type-badge {
+  margin-top: 1.5rem;
+  text-align: center;
+  padding: 0.8rem 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+  border: 2px solid rgba(139, 92, 246, 0.3);
+  color: white;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Info Section */
+.detail-info-section {
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.detail-header {
+  margin-bottom: 2rem;
+  text-align: center;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid rgba(139, 92, 246, 0.3);
+}
+
+.detail-title {
+  font-family: 'Cinzel', serif;
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fbbf24, #ec4899, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+  filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.4));
+}
+
+.detail-subtitle {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+}
+
+/* Meanings */
+.detail-meanings {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.meaning-card {
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  border-left: 4px solid #a855f7;
+  transition: all 0.3s ease;
+}
+
+.meaning-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(5px);
+}
+
+.meaning-card.reversed-card {
+  border-left-color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.meaning-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.meaning-icon {
+  font-size: 1.5rem;
+}
+
+.meaning-header h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.95);
+  margin: 0;
+}
+
+.meaning-content {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+}
+
+/* Note */
+.detail-note {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: rgba(139, 92, 246, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.detail-note p {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Quicksand', sans-serif;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Loading */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 1rem;
+}
+
+.spinner-large {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-top-color: #a855f7;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading p {
+  font-family: 'Quicksand', sans-serif;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.2rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .detail-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .detail-card-section {
+    position: relative;
+    top: 0;
+  }
+
+  .detail-card-image {
+    max-width: 350px;
+  }
+
+  .detail-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .tarot-detail-page {
+    padding: 1rem;
+  }
+
+  .detail-card-image {
+    max-width: 300px;
+  }
+
+  .detail-title {
+    font-size: 2rem;
+  }
+
+  .detail-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .detail-info-section {
+    padding: 1.5rem;
+  }
+
+  .meaning-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .meaning-content {
+    font-size: 0.95rem;
+  }
+}

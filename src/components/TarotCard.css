@@ -1,28 +1,58 @@
-.tarot-card-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  perspective: 1000px;
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap');
+
+.tarot-card-wrapper {
+  position: relative;
+  width: 280px;
+  animation: fadeInScale 0.6s ease-out;
 }
 
-.position-label {
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Category Header - Simple Text */
+.card-category-header {
+  text-align: center;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0;
+}
+
+.category-title {
+  font-family: 'Quicksand', sans-serif;
   font-size: 1.1rem;
-  font-weight: 600;
-  color: #fff;
+  font-weight: 800;
+  letter-spacing: 3px;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+
+  color: #ffffff;
+
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.9),
+    0 0 16px rgba(255, 255, 255, 0.6),
+    0 0 28px rgba(255, 255, 255, 0.4);
+
+  margin: 0;
 }
 
-.tarot-card {
-  width: 200px;
-  height: 320px;
+
+/* 3D Card Container */
+.tarot-card-3d {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  perspective: 1000px;
   cursor: pointer;
   transition: transform 0.3s ease;
 }
 
-.tarot-card:hover:not(.revealed) {
+.tarot-card-3d.hovered:not(.revealed) {
   transform: translateY(-10px);
 }
 
@@ -30,115 +60,296 @@
   position: relative;
   width: 100%;
   height: 100%;
-  transition: transform 0.6s;
+  transition: transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
   transform-style: preserve-3d;
 }
 
-.tarot-card.flipped .card-inner {
+.tarot-card-3d.revealed .card-inner {
   transform: rotateY(180deg);
 }
 
+/* Card Faces */
 .card-face {
   position: absolute;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  border-radius: 15px;
+  border-radius: 16px;
   overflow: hidden;
 }
 
+/* Card Back */
 .card-back {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border: 3px solid rgba(255, 255, 255, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: linear-gradient(135deg, #1a0b2e 0%, #16213e 100%);
+  border: 3px solid rgba(139, 92, 246, 0.5);
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(139, 92, 246, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-.card-pattern {
-  position: relative;
+.card-back-design {
   width: 100%;
   height: 100%;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.card-symbol {
-  font-size: 4rem;
-  animation: sparkle 2s ease-in-out infinite;
+.card-back-border {
+  width: 90%;
+  height: 95%;
+  border: 2px solid rgba(168, 85, 247, 0.4);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
-@keyframes sparkle {
-  0%,
-  100% {
-    opacity: 0.6;
+.card-back-pattern {
+  width: 85%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  position: relative;
+}
+
+.mystical-symbol {
+  font-size: 5rem;
+  color: #a855f7;
+  text-shadow: 
+    0 0 20px rgba(168, 85, 247, 0.8),
+    0 0 40px rgba(168, 85, 247, 0.6);
+  animation: symbolPulse 3s ease-in-out infinite;
+}
+
+@keyframes symbolPulse {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1) rotate(180deg);
+    opacity: 1;
+  }
+}
+
+.mystical-circles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.circle {
+  position: absolute;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.circle-1 {
+  width: 60%;
+  height: 60%;
+  animation: circleRotate 10s linear infinite;
+}
+
+.circle-2 {
+  width: 75%;
+  height: 75%;
+  animation: circleRotate 15s linear infinite reverse;
+}
+
+.circle-3 {
+  width: 90%;
+  height: 90%;
+  animation: circleRotate 20s linear infinite;
+}
+
+@keyframes circleRotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.mystical-stars {
+  display: flex;
+  gap: 2rem;
+  font-size: 1.5rem;
+  color: rgba(168, 85, 247, 0.6);
+}
+
+.mystical-stars span {
+  animation: starTwinkle 2s ease-in-out infinite;
+}
+
+.mystical-stars span:nth-child(1) { animation-delay: 0s; }
+.mystical-stars span:nth-child(2) { animation-delay: 0.5s; }
+.mystical-stars span:nth-child(3) { animation-delay: 1s; }
+.mystical-stars span:nth-child(4) { animation-delay: 1.5s; }
+
+@keyframes starTwinkle {
+  0%, 100% {
+    opacity: 0.4;
     transform: scale(1);
   }
   50% {
     opacity: 1;
-    transform: scale(1.1);
+    transform: scale(1.3);
   }
 }
 
-.card-border {
+/* Click Hint */
+.click-hint {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  bottom: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 10px;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  animation: bounce 2s ease-in-out infinite;
 }
 
+@keyframes bounce {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+}
+
+.hint-icon {
+  font-size: 2rem;
+  filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.6));
+}
+
+.hint-text {
+  font-family: 'Quicksand', sans-serif;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Card Front - Full Image */
 .card-front {
-  background: #ffffff;
-  border: 3px solid rgba(139, 92, 246, 0.5);
   transform: rotateY(180deg);
-  overflow: hidden;
-}
-
-.card-image-container {
-  width: 100%;
-  height: 100%;
+  background: white;
+  border: 3px solid var(--category-color);
+  box-shadow: 
+    0 15px 50px rgba(0, 0, 0, 0.3),
+    0 0 30px var(--category-color);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem;
-  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Full Card Image */
+.card-image-full {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.card-image-full.reversed-image {
+  transform: rotate(180deg);
 }
 
 .card-image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   transition: transform 0.3s ease;
 }
 
-.card-image.reversed {
-  transform: rotate(180deg);
+.tarot-card-3d:hover .card-image {
+  transform: scale(1.05);
 }
 
-.card-symbol-fallback {
-  font-size: 4rem;
-  animation: float 3s ease-in-out infinite;
-}
-
-/* Caption that appears below the card */
-.card-caption {
-  margin-top: 1rem;
-  padding: 1rem;
-  background: rgba(0, 0, 0, 0.8);
+/* Card Info Below - Appears under card when revealed */
+.card-info-below {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
-  border-radius: 12px;
-  border: 2px solid rgba(139, 92, 246, 0.4);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.5s ease-out;
 }
 
-.card-header {
-  text-align: center;
-  border-bottom: 2px solid rgba(139, 92, 246, 0.3);
-  padding-bottom: 0.8rem;
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Reversed Badge - Below card */
+.reversed-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: rgba(255, 152, 0, 0.2);
+  border: 2px solid rgba(255, 152, 0, 0.6);
+  border-radius: 25px;
+  color: #ffab40;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 0 20px rgba(255, 152, 0, 0.4);
+  animation: reversedGlow 2s ease-in-out infinite;
+  margin: 0 auto 1rem;
+  width: fit-content;
+}
+
+.reversed-icon {
+  width: 20px;                 /* ✅ ép box vuông */
+  height: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;     /* ✅ icon nằm đúng tâm */
+
+  font-size: 1.1rem;
+  line-height: 1;
+  flex-shrink: 0;              /* ✅ không bị bóp */
+}
+
+
+
+@keyframes reversedGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 152, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 152, 0, 0.6);
+  }
 }
 
 .card-name {
@@ -158,81 +369,183 @@
   text-align: center;
 }
 
-.card-symbol-main {
-  font-size: 3rem;
-  text-align: center;
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
 
 .card-meaning {
-  margin-top: 0.5rem;
-  text-align: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  border-left: 3px solid var(--category-color);
+  margin-bottom: 1rem;
 }
 
 .meaning-text {
-  font-size: 0.9rem;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.9);
   line-height: 1.6;
-  color: #e0e0e0;
-  margin: 0;
-  font-weight: 400;
   text-align: center;
+  margin: 0;
 }
 
-.reversed-indicator {
-  display: inline-block;
-  padding: 0.4rem 0.8rem;
-  margin-bottom: 0.8rem;
-  background: rgba(255, 152, 0, 0.2);
-  border: 2px solid rgba(255, 152, 0, 0.6);
-  border-radius: 8px;
-  color: #ffab40;
-  font-size: 0.85rem;
+/* View Details Button */
+.view-details-btn {
+  padding: 0.8rem 1.5rem;
+  background: var(--category-color);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.95rem;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  box-shadow: 0 0 15px rgba(255, 152, 0, 0.3);
-  animation: reversedGlow 2s ease-in-out infinite;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-@keyframes reversedGlow {
+.view-details-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.btn-arrow {
+  transition: transform 0.3s ease;
+}
+
+.view-details-btn:hover .btn-arrow {
+  transform: translateX(5px);
+}
+
+/* Card Decorations */
+.card-decorations {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.corner-decoration {
+  position: absolute;
+  font-size: 1.2rem;
+  color: var(--category-color);
+  opacity: 0.3;
+}
+
+.top-left { top: 10px; left: 10px; }
+.top-right { top: 10px; right: 10px; }
+.bottom-left { bottom: 10px; left: 10px; }
+.bottom-right { bottom: 10px; right: 10px; }
+
+/* Card Glow */
+.card-glow {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: var(--glow-color);
+  opacity: 0.2;
+  filter: blur(20px);
+  border-radius: 20px;
+  z-index: -1;
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
   0%, 100% {
-    box-shadow: 0 0 15px rgba(255, 152, 0, 0.3);
+    opacity: 0.2;
   }
   50% {
-    box-shadow: 0 0 25px rgba(255, 152, 0, 0.5);
+    opacity: 0.4;
   }
+}
+
+/* Position Indicator */
+.position-indicator {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.position-dot {
+  width: 8px;
+  height: 8px;
+  background: rgba(168, 85, 247, 0.6);
+  border-radius: 50%;
+  animation: dotPulse 2s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+}
+
+.position-number {
+  font-family: 'Quicksand', sans-serif;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .tarot-card {
-    width: 160px;
-    height: 256px;
+  .tarot-card-wrapper {
+    width: 240px;
   }
 
-  .position-label {
-    font-size: 0.95rem;
+  .category-title {
+    font-size: 1rem;
+    letter-spacing: 2px;
+  }
+
+  .tarot-card-3d {
+    height: 400px;
+  }
+
+  .card-image-full {
+    height: 100%;
+  }
+
+  .card-info-below {
+    padding: 1rem;
+    margin-top: 1rem;
   }
 
   .card-name {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
 
-  .card-symbol-main {
-    font-size: 2.5rem;
+  .card-name-en {
+    font-size: 0.85rem;
+  }
+
+  .card-meaning {
+    padding: 0.8rem;
   }
 
   .meaning-text {
     font-size: 0.9rem;
+  }
+
+  .view-details-btn {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .mystical-symbol {
+    font-size: 4rem;
   }
 }

@@ -620,3 +620,136 @@
     animation-delay: 5.2s;
     animation-duration: 3.1s;
 }
+
+/* Shuffling Animation */
+.shuffling-animation {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  height: 300px;
+  margin: 3rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.card-deck {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shuffle-card {
+  position: absolute;
+  width: 120px;
+  height: 180px;
+  background: linear-gradient(135deg, #1a0b2e 0%, #16213e 100%);
+  border: 3px solid rgba(139, 92, 246, 0.5);
+  border-radius: 12px;
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(139, 92, 246, 0.3);
+  animation: shuffleCard 2s ease-in-out infinite;
+  animation-delay: calc(var(--card-index) * 0.1s);
+}
+
+.shuffle-card::before {
+  content: '✦';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  color: #a855f7;
+  text-shadow: 
+    0 0 20px rgba(168, 85, 247, 0.8),
+    0 0 40px rgba(168, 85, 247, 0.6);
+  animation: symbolPulse 2s ease-in-out infinite;
+}
+
+@keyframes shuffleCard {
+  0%, 100% {
+    transform: translateX(calc(var(--card-index) * -15px)) 
+               translateY(calc(var(--card-index) * -3px))
+               rotate(calc(var(--card-index) * -2deg));
+    opacity: 0.8;
+  }
+  25% {
+    transform: translateX(calc(var(--card-index) * 20px)) 
+               translateY(calc(var(--card-index) * 10px))
+               rotate(calc(var(--card-index) * 5deg));
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(calc(var(--card-index) * -20px)) 
+               translateY(calc(var(--card-index) * -10px))
+               rotate(calc(var(--card-index) * -5deg));
+    opacity: 0.9;
+  }
+  75% {
+    transform: translateX(calc(var(--card-index) * 15px)) 
+               translateY(calc(var(--card-index) * 5px))
+               rotate(calc(var(--card-index) * 3deg));
+    opacity: 1;
+  }
+}
+
+.shuffle-text {
+  font-family: 'Cinzel', serif;
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  animation: textPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes textPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes symbolPulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1) rotate(180deg);
+    opacity: 1;
+  }
+}
+
+/* Responsive for Shuffling Animation */
+@media (max-width: 768px) {
+  .shuffling-animation {
+    height: 250px;
+    margin: 2rem auto;
+  }
+
+  .card-deck {
+    height: 150px;
+  }
+
+  .shuffle-card {
+    width: 90px;
+    height: 135px;
+  }
+
+  .shuffle-card::before {
+    font-size: 2rem;
+  }
+
+  .shuffle-text {
+    font-size: 1.2rem;
+  }
+}
